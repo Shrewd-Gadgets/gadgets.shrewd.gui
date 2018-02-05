@@ -1,4 +1,4 @@
-package gadgets.shrewd.gui.panel.war;
+package gadgets.shrewd.gui.panel.game.card;
 
 /**
  * A basic representation of a standard range of playing cards, suitable for most card

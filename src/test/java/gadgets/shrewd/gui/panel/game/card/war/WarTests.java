@@ -1,5 +1,7 @@
-package gadgets.shrewd.gui.panel.war;
+package gadgets.shrewd.gui.panel.game.card.war;
 
+import gadgets.shrewd.gui.panel.game.card.Deck;
+import gadgets.shrewd.gui.panel.game.card.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -12,8 +14,8 @@ public class WarTests {
         starter.populate();
         starter.shuffle();
 
-        Player challenger = new Player("David");
-        Player opponent = new Player("Goliath");
+        Warrior challenger = new Warrior("David");
+        Warrior opponent = new Warrior("Goliath");
         War game = new War(starter, challenger, opponent);
         game.deal();
         Player winner = game.play();

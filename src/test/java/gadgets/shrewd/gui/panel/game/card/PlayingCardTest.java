@@ -1,4 +1,4 @@
-package gadgets.shrewd.gui.panel.war;
+package gadgets.shrewd.gui.panel.game.card;
 
 import org.junit.Test;
 

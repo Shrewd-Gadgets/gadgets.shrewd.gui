@@ -1,28 +1,23 @@
-package gadgets.shrewd.gui.panel.war;
+package gadgets.shrewd.gui.panel.game.card.war;
+
+import gadgets.shrewd.gui.panel.game.card.Deck;
+import gadgets.shrewd.gui.panel.game.card.Player;
+import gadgets.shrewd.gui.panel.game.card.PlayingCard;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Player {
+public class Warrior extends Player {
 
-    private String name;
     private Deck hand;
     private Deck pot;
 
-    public Player(String name) {
-        this.name = name;
+    public Warrior(String name) {
+        super(name);
         this.hand = new Deck();
         this.pot = new Deck();
-    }
-
-    public Deck getHand() {
-        return this.hand;
-    }
-
-    public Deck getPot() {
-        return this.pot;
     }
 
     public void putCardInPot(PlayingCard card) {
@@ -68,7 +63,4 @@ public class Player {
     public int getCardCount() {
         return this.hand.size() + this.pot.size();
     }
-
-    @Override
-    public String toString() { return this.name; }
 }

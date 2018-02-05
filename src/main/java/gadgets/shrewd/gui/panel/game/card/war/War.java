@@ -1,4 +1,7 @@
-package gadgets.shrewd.gui.panel.war;
+package gadgets.shrewd.gui.panel.game.card.war;
+
+import gadgets.shrewd.gui.panel.game.card.Deck;
+import gadgets.shrewd.gui.panel.game.card.PlayingCard;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -11,11 +14,11 @@ import java.util.Optional;
 public class War {
 
     private Deck deck;
-    private Player challenger;
-    private Player opponent;
+    private Warrior challenger;
+    private Warrior opponent;
     private boolean isGameInProgress;
 
-    public War(Deck deck, Player challenger, Player opponent) {
+    public War(Deck deck, Warrior challenger, Warrior opponent) {
         this.deck = deck;
         this.challenger = challenger;
         this.opponent = opponent;
@@ -46,16 +49,16 @@ public class War {
         }
     }
 
-    public Player play() {
+    public Warrior play() {
         if (this.isGameInProgress())
             throw new IllegalStateException("A game is already in progress; another cannot be played yet.");
 
         this.gameStarted();
-        Player c = this.challenger;
-        Player o = this.opponent;
+        Warrior c = this.challenger;
+        Warrior o = this.opponent;
         System.out.println(String.format("Challenger: %s\t\tOpponent: %s", c, o));
 
-        Player winner = null;       //Placeholder for winning player.
+        Warrior winner = null;       //Placeholder for winning player.
         Deck turn = new Deck();     //Micro-deck needed for stacking played cards.
         int turnCount = 0;          //Simple counter to track played turns.
         while(Objects.isNull(winner)) {
