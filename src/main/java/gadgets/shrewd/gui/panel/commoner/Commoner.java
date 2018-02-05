@@ -12,12 +12,14 @@ import java.util.Optional;
 public class Commoner extends TabbedPanel {
 
     public Commoner() {
-        TextFieldInputGroup primary =
-                new TextFieldInputGroup("First string:", null, true);
-        TextFieldInputGroup secondary =
-                new TextFieldInputGroup("Second string:", null, true);
-        TextFieldInputGroup result =
-                new TextFieldInputGroup("Common characters:", null, false);
+        TextFieldInputGroup primary = new TextFieldInputGroup.Builder()
+                .text("First string:").build();
+        TextFieldInputGroup secondary = new TextFieldInputGroup.Builder()
+                .text("Second string:").build();
+        TextFieldInputGroup result = new TextFieldInputGroup.Builder()
+                .text("Common characters:")
+                .uneditable()
+                .build();
 
         Button button = new Commoner.Button(
                 primary.getComponent(),
