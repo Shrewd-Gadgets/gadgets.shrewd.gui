@@ -1,81 +1,35 @@
 package gadgets.shrewd.gui.panel.scambler;
 
 import gadgets.shrewd.core.util.Words;
-import gadgets.shrewd.gui.panel.FormInputGroupable;
-import gadgets.shrewd.gui.panel.Tabable;
+import gadgets.shrewd.gui.panel.TabbedPanel;
+import gadgets.shrewd.gui.panel.TextFieldInputGroup;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Optional;
 
-public class Scrambler extends JPanel implements Tabable {
+public class Scrambler extends TabbedPanel {
 
-    public Scrambler(Container parent) {
+    private static final int DEFAULT_WIDTH = 30;
+
+    public Scrambler() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        Sentence sentence = new Scrambler.Sentence();
-        Reversed reversed = new Scrambler.Reversed();
+        TextFieldInputGroup sentence = new TextFieldInputGroup.Builder()
+                .text("Sentence:")
+                .field("Here is a default sentence.")
+                .columns(DEFAULT_WIDTH)
+                .build();
+        TextFieldInputGroup reversed = new TextFieldInputGroup.Builder()
+                .text("Reversed:")
+                .columns(DEFAULT_WIDTH)
+                .build();
         Container button = new Scrambler.Button(
                 sentence.getComponent(),
                 reversed.getComponent());
 
-        this.add(sentence);
-        this.add(reversed);
-        this.add(button);
-    }
-
-    class Sentence extends JPanel implements FormInputGroupable<JTextField> {
-
-        private JLabel label;
-        private JTextField component;
-
-        Sentence() {
-            this.label = new JLabel("Sentence:");
-            this.component = new JTextField("Here is a default sentence.");
-
-            this.add(label);
-            this.add(component);
-        }
-
-        @Override
-        public JLabel getLabel() {
-            return this.label;
-        }
-
-        @Override
-        public JTextField getComponent() {
-            return this.component;
-        }
-    }
-
-    class Reversed extends JPanel implements FormInputGroupable<JTextField> {
-
-        private JLabel label;
-        private JTextField component;
-
-        Reversed() {
-            super(new GridBagLayout());
-            this.label = new JLabel("Reversed:");
-
-            this.component = new JTextField();
-            this.component.setEditable(false);
-            this.component.setAutoscrolls(true);
-
-            GridBagConstraints c = new GridBagConstraints();
-            c.fill = GridBagConstraints.HORIZONTAL;
-            this.add(label);
-            this.add(component, c);
-        }
-
-        @Override
-        public JLabel getLabel() {
-            return this.label;
-        }
-
-        @Override
-        public JTextField getComponent() {
-            return this.component;
-        }
+        this.containers = Arrays.asList(sentence, reversed, button);
     }
 
     class Button extends JPanel {
