@@ -12,8 +12,8 @@ public class WarTests {
         starter.populate();
         starter.shuffle();
 
-        Player challenger = new Player();
-        Player opponent = new Player();
+        Player challenger = new Player("David");
+        Player opponent = new Player("Goliath");
         War game = new War(starter, challenger, opponent);
         game.deal();
         Player winner = game.play();

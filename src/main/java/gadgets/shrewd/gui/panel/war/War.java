@@ -1,15 +1,19 @@
 package gadgets.shrewd.gui.panel.war;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * A simple card game that intimately uses the concept of a stack to manage collections
+ * of playing cards between two players as they compete to obtain all the cards in a
+ * standard playing card deck.
+ */
 public class War {
 
     private Deck deck;
     private Player challenger;
     private Player opponent;
+    private boolean isGameInProgress;
 
     public War(Deck deck, Player challenger, Player opponent) {
         this.deck = deck;
@@ -17,8 +21,21 @@ public class War {
         this.opponent = opponent;
     }
 
+    public boolean isGameInProgress() {
+        return this.isGameInProgress;
+    }
+
+    private void gameStarted() { this.isGameInProgress = true; }
+    private void gameFinished() { this.isGameInProgress = false; }
+
     public void deal() {
-        while(this.deck.isNotEmpty()) {
+        if (this.isGameInProgress())
+            throw new IllegalStateException("A game is already in progress; players cannot be dealt cards.");
+
+        if (this.deck.isEmpty())
+            throw new IllegalStateException("The starter deck is empty; cards cannot be dealt to players with an empty deck.");
+
+        while(this.deck.isNotEmpty() && !this.isGameInProgress()) {
             PlayingCard card = this.deck.pop()
                     .orElseThrow(IllegalStateException::new);
 
@@ -30,14 +47,17 @@ public class War {
     }
 
     public Player play() {
+        if (this.isGameInProgress())
+            throw new IllegalStateException("A game is already in progress; another cannot be played yet.");
+
+        this.gameStarted();
         Player c = this.challenger;
         Player o = this.opponent;
-
-        //The game runs until one player has no cards left.
-        Player winner = null;
-        Turn turn = new Turn();
         System.out.println(String.format("Challenger: %s\t\tOpponent: %s", c, o));
-        int turnCount = 0;
+
+        Player winner = null;       //Placeholder for winning player.
+        Deck turn = new Deck();     //Micro-deck needed for stacking played cards.
+        int turnCount = 0;          //Simple counter to track played turns.
         while(Objects.isNull(winner)) {
             System.out.println(String.format(
                     "Current score: Challenger %d cards, Opponent %d cards",
@@ -109,11 +129,11 @@ public class War {
             turnCount++;
         } //End turn while loop
 
-
+        this.gameFinished();
         System.out.println(String.format(
                 "Final score: Challenger %d cards, Opponent %d cards after %d turns",
                 c.getCardCount(), o.getCardCount(), turnCount));
-        System.out.println(String.format("Winner: %s", winner));
+        System.out.println(String.format("WINNER: %s!", winner).toUpperCase());
         return winner;
     }
 
@@ -128,15 +148,5 @@ public class War {
      */
     int beats(PlayingCard c1, PlayingCard c2) {
         return Integer.compare(c1.getRank().rank(), c2.getRank().rank());
-    }
-
-    class Turn extends Deck {
-
-        public List<PlayingCard> flush() {
-            List<PlayingCard> cards = new ArrayList<>();
-            while(this.isNotEmpty())
-                cards.add(this.pop().orElseThrow(IllegalStateException::new));
-            return cards;
-        }
     }
 }

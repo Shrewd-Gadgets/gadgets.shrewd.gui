@@ -7,10 +7,12 @@ import java.util.Optional;
 
 public class Player {
 
+    private String name;
     private Deck hand;
     private Deck pot;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
         this.hand = new Deck();
         this.pot = new Deck();
     }
@@ -66,4 +68,7 @@ public class Player {
     public int getCardCount() {
         return this.hand.size() + this.pot.size();
     }
+
+    @Override
+    public String toString() { return this.name; }
 }
