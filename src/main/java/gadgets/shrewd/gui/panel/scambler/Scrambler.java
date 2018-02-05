@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class Scrambler extends JPanel implements Tabable {
 
-    public Scrambler(Container parent) {
+    public Scrambler() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         Sentence sentence = new Scrambler.Sentence();
