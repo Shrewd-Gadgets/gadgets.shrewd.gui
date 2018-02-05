@@ -74,10 +74,13 @@ public class PlayingCard {
      */
     @Override
     public boolean equals(Object o) {
-        if (!super.equals(o) || !(o instanceof PlayingCard))
+        if (super.equals(o))
+            return true;
+
+        if (!(o instanceof PlayingCard))
             return false;
 
         PlayingCard c = (PlayingCard)o;
-        return this.getSuit().equals(c.getSuit()) && this.getRank().equals(c.getRank());
+        return (this.suit.equals(c.getSuit()) && this.rank.equals(c.getRank()));
     }
 }
