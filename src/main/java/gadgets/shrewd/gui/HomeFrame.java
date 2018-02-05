@@ -1,8 +1,9 @@
 package gadgets.shrewd.gui;
 
+import gadgets.shrewd.gui.panel.HomePane;
+
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
 
 public class HomeFrame extends JFrame {
 
@@ -15,20 +16,9 @@ public class HomeFrame extends JFrame {
         this.setSize(300,200); // default size is 0,0
         this.setLocation(10,200); // default is 0,0 (top left corner)
 
-        Terminator terminator = new Terminator();
-        this.addWindowListener(terminator);
-    }
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
-
-    /**
-     * Simple termination class that closes the process when the window is closed.
-     */
-    public static class Terminator extends WindowAdapter {
-
-        @Override
-        public void windowClosing(WindowEvent event) {
-            System.exit(0);
-        }
+        HomePane pane = new HomePane();
+        this.add(pane, BorderLayout.CENTER);
     }
 }

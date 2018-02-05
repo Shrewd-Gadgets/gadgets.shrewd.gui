@@ -53,6 +53,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>gadgets.shrewd</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- testing -->
         <dependency>
             <groupId>junit</groupId>
