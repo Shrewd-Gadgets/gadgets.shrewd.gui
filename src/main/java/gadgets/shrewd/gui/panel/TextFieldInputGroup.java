@@ -2,7 +2,11 @@ package gadgets.shrewd.gui.panel;
 
 import javax.swing.*;
 
-public class TextFieldInputGroup extends JPanel implements FormInputGroupable<JTextField> {
+/**
+ * Implementation of the input group interface specifically for a Swing TextField
+ * Component as a thin free form panel.
+ */
+public class TextFieldInputGroup extends JPanel implements InputGroupable<JTextField> {
 
     private JLabel label;
     private JTextField component;
@@ -11,7 +15,7 @@ public class TextFieldInputGroup extends JPanel implements FormInputGroupable<JT
         this.label = new JLabel(builder.text);
         this.component = new JTextField(
                 builder.field,
-                builder.cols > 0 ? builder.cols : 20);
+                builder.cols);
         this.component.setEditable(builder.isEditable);
 
         this.add(label);
@@ -28,18 +32,57 @@ public class TextFieldInputGroup extends JPanel implements FormInputGroupable<JT
         return this.component;
     }
 
+    /**
+     * Public builder class for constructing the label and text field pieces.
+     */
     public static class Builder {
         private String text;
         private String field;
         private int cols;
         private boolean isEditable = true;
 
+        /**
+         * Uses the set values in the builder to construct a new instance of a input group.
+         * @return New TextFieldInputGroup instance.
+         */
         public TextFieldInputGroup build() { return new TextFieldInputGroup(this); }
 
+        /**
+         * The label text displayed to prompt a user for input.
+         * The text is displayed "as is" so any punctuation like colons or hyphens must
+         * be included as part of the text.
+         * @param text Displayable text, e.g. "Name"
+         * @return Builder instance.
+         */
         public Builder text(String text) { this.text = text; return this; }
+
+        /**
+         * Optional starting text for the text field.
+         * @param field Field text to be displayed.
+         * @return Builder instance.
+         */
         public Builder field(String field) { this.field = field; return this; }
-        public Builder columns(int cols) { this.cols = cols; return this; }
+
+        /**
+         * Optional static column size for the text field.
+         * Values less than 10 will be ignored.
+         * @param cols Field column, i.e. character, width.
+         * @return Builder instance.
+         */
+        public Builder columns(int cols) { this.cols = cols < 10 ? 10 : cols; return this; }
+
+        /**
+         * The text field will accept user input.
+         * @return Builder instance.
+         * @see Builder#uneditable()
+         */
         public Builder editable() { this.isEditable = true; return this; }
+
+        /**
+         * The text field will <u>not</u> accept user input.
+         * @return Builder instance.
+         * @see Builder#editable()
+         */
         public Builder uneditable() { this.isEditable = false; return this; }
 
     }

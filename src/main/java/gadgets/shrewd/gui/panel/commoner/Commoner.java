@@ -11,14 +11,21 @@ import java.util.Optional;
 
 public class Commoner extends TabbedPanel {
 
+    private static final int DEFAULT_WIDTH = 50;
+
     public Commoner() {
         TextFieldInputGroup primary = new TextFieldInputGroup.Builder()
-                .text("First string:").build();
+                .text("First string:")
+                .columns(DEFAULT_WIDTH)
+                .build();
         TextFieldInputGroup secondary = new TextFieldInputGroup.Builder()
-                .text("Second string:").build();
+                .text("Second string:")
+                .columns(DEFAULT_WIDTH)
+                .build();
         TextFieldInputGroup result = new TextFieldInputGroup.Builder()
                 .text("Common characters:")
                 .uneditable()
+                .columns(DEFAULT_WIDTH)
                 .build();
 
         Button button = new Commoner.Button(
@@ -27,21 +34,6 @@ public class Commoner extends TabbedPanel {
                 result.getComponent());
 
         this.containers = Arrays.asList(primary, secondary, result, button);
-    }
-
-    @Override
-    public String getTitle() {
-        return "Commoner";
-    }
-
-    @Override
-    public ImageIcon getIcon() {
-        return null;
-    }
-
-    @Override
-    public Optional<String> getTip() {
-        return Optional.of("Find common characters between strings.");
     }
 
     class Button extends JPanel {
@@ -68,4 +60,20 @@ public class Commoner extends TabbedPanel {
             this.add(button);
         }
     }
+
+    @Override
+    public String getTitle() {
+        return "Commoner";
+    }
+
+    @Override
+    public ImageIcon getIcon() {
+        return null;
+    }
+
+    @Override
+    public Optional<String> getTip() {
+        return Optional.of("Find common characters between strings.");
+    }
+
 }
