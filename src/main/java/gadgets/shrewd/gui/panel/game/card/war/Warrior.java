@@ -60,6 +60,10 @@ public class Warrior extends Player {
         return this.hand.isNotEmpty() || this.pot.isNotEmpty();
     }
 
+    public boolean hasNoCards() {
+        return !this.hasCards();
+    }
+
     public int getCardCount() {
         return this.hand.size() + this.pot.size();
     }

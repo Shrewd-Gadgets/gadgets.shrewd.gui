@@ -61,7 +61,7 @@ public class Deck implements Stackable<PlayingCard> {
         if (cards.isEmpty())
             return Optional.empty();
 
-        PlayingCard card = cards.get(cards.size() - 1);
+        PlayingCard card = cards.remove(cards.size() - 1);
         //The Deck shouldn't have NULLs but lets protect ourselves anyway.
         return Optional.ofNullable(card);
     }
