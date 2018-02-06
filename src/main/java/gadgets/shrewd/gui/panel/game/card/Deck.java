@@ -12,6 +12,10 @@ import java.util.Random;
 /**
  * A playing card deck represents a simple stack where cards are placed on top of and
  * sometimes popped off of during most card games.
+ *
+ * While this simple example ultimately uses an in-memory array to store the cards for each
+ * Deck, the Stackable interface allows us to standardize the interaction while hiding
+ * the implementation details.
  */
 public class Deck implements Stackable<PlayingCard> {
 
@@ -22,20 +26,27 @@ public class Deck implements Stackable<PlayingCard> {
     }
 
     /**
+     * Package-protected method for accessing the card stack in tests.
+     * @return Current card stack.
+     */
+    List<PlayingCard> getCards() { return this.cards; }
+
+    /**
      * Adds a PlayingCard to the top of the Deck.
      * @param card Instance of a PlayingCard
-     * @throws IllegalArgumentException if the supplied PlayingCard instance is NULL.
-     * @throws IllegalStateException if an equal PlayingCard is already in the Deck.
+     * @throws IllegalArgumentException if the supplied PlayingCard instance is NULL, or
+     *      if an equivalent PlayingCard is already on the Deck.
      */
     @Override
     public void push(PlayingCard card) {
         if (Objects.isNull(card))
             throw new IllegalArgumentException("Only an instance of a PlayingCard may be added to the Deck");
 
-        if (this.cards.contains(card))
-            throw new IllegalStateException("A Deck cannot contain duplicates of PlayingCards");
+        List<PlayingCard> cards = this.getCards();
+        if (cards.contains(card))
+            throw new IllegalArgumentException("A Deck cannot contain duplicates of PlayingCards");
 
-        this.cards.add(card);
+        cards.add(card);
     }
 
     /**
@@ -45,9 +56,14 @@ public class Deck implements Stackable<PlayingCard> {
      */
     @Override
     public Optional<PlayingCard> pop() {
-        return this.isEmpty() ?
-                Optional.empty() :
-                Optional.of(this.cards.remove(this.size() - 1));
+        List<PlayingCard> cards = this.getCards();
+        //If the Deck says we're empty, we're empty.
+        if (cards.isEmpty())
+            return Optional.empty();
+
+        PlayingCard card = cards.get(cards.size() - 1);
+        //The Deck shouldn't have NULLs but lets protect ourselves anyway.
+        return Optional.ofNullable(card);
     }
 
     /**
@@ -56,7 +72,7 @@ public class Deck implements Stackable<PlayingCard> {
      */
     @Override
     public Integer size() {
-        return this.cards.size();
+        return this.getCards().size();
     }
 
     /**
@@ -66,7 +82,7 @@ public class Deck implements Stackable<PlayingCard> {
      */
     @Override
     public boolean isEmpty() {
-        return (this.size() == 0);
+        return this.getCards().isEmpty();
     }
 
     /**
@@ -113,14 +129,15 @@ public class Deck implements Stackable<PlayingCard> {
      * @param rand Random number generator.
      */
     void shuffle(Random rand) {
-        int size = this.size();
+        List<PlayingCard> cards = this.getCards();
+        int size = cards.size();
         PlayingCard swap;
         for(int i = 0; i < size; i++) {
-            swap = this.cards.get(i);
+            swap = cards.get(i);
 
             int s = rand.nextInt(size);
-            this.cards.set(i, this.cards.get(s));
-            this.cards.set(s, swap);
+            cards.set(i, cards.get(s));
+            cards.set(s, swap);
         }
     }
 
@@ -131,7 +148,7 @@ public class Deck implements Stackable<PlayingCard> {
     public Collection<PlayingCard> flush() {
         List<PlayingCard> cards = new ArrayList<>();
         while(this.isNotEmpty())
-            cards.add(this.pop().orElseThrow(IllegalStateException::new));
+            this.pop().ifPresent(cards::add);
         return cards;
     }
 }

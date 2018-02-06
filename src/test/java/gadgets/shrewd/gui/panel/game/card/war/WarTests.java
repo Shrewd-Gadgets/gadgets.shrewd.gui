@@ -2,6 +2,7 @@ package gadgets.shrewd.gui.panel.game.card.war;
 
 import gadgets.shrewd.gui.panel.game.card.Deck;
 import gadgets.shrewd.gui.panel.game.card.Player;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -9,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 public class WarTests {
 
     @Test
+    @Ignore
     public void go_to_war() {
         Deck starter = new Deck();
         starter.populate();
