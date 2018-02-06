@@ -74,19 +74,19 @@ public class War {
         //Micro-deck needed for stacking played cards across turns.
         Deck turn = new Deck();
         while(outcome.hasNoVictor()) {
-            if (turn.isNotEmpty() && !c.hasCards()) {
+            if (turn.isNotEmpty() && c.hasNoCards()) {
                 //If this was a WAR-turn and the challenger has no more cards, opponent wins.
                 outcome.exhausted(o, turn, c);
                 continue;
-            } else if (turn.isNotEmpty() && !o.hasCards()) {
+            } else if (turn.isNotEmpty() && o.hasNoCards()) {
                 //If this was a WAR-turn and the opponent has no more cards, challenger wins.
                 outcome.exhausted(c, turn, o);
                 continue;
             }
 
             //At the start of the turn, each player draws a card.
-            Optional<PlayingCard> optChallengerCard = c.getCardFromHand();
-            Optional<PlayingCard> optOpponentCard = o.getCardFromHand();
+            Optional<PlayingCard> optChallengerCard = c.playCard();
+            Optional<PlayingCard> optOpponentCard = o.playCard();
 
             //Proactively store the cards in the turn deck to be allocated to the champion of the turn later.
             optChallengerCard.ifPresent(turn::push);
@@ -120,8 +120,8 @@ public class War {
                 case 0:
                     //WAR!  Equal card ranks were played; play again to determine turn winner.
                     //Each player must sacrifice one extra card and add it to the turn stack.
-                    c.getCardFromHand().ifPresent(turn::push);
-                    o.getCardFromHand().ifPresent(turn::push);
+                    c.playCard().ifPresent(turn::push);
+                    o.playCard().ifPresent(turn::push);
                     outcome.log("=====  WAR (%d cards up for grabs) =====", turn.size());
                     //Restart the loop
             }
@@ -129,7 +129,7 @@ public class War {
         } //End turn while loop
 
         this.gameFinished();
-        outcome.log("After %d turns, %s has beaten %s.", outcome.turns(),
+        outcome.log("After %d turns, %s has beaten %s.", outcome.getTurns(),
                 outcome.getWinner().orElse(Outcome.NO_ONE),
                 outcome.getLoser().orElse(Outcome.ANYONE));
     }
