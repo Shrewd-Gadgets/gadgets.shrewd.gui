@@ -1,5 +1,5 @@
 # gadgets.shrewd.gui
-A simple Swing application to utilize with the core library.
+A simple Swing application to utilize the core library.
 
 ## Packaging
 Since Shrewd Gadgets does not have it's own remote Maven repository developers will need
