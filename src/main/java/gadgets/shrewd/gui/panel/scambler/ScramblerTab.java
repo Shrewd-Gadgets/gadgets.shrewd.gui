@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class ScramblerTab extends TabbedPanel {
 
-    private static final int DEFAULT_WIDTH = 30;
+    private static final int DEFAULT_WIDTH = 300;
 
     public ScramblerTab() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

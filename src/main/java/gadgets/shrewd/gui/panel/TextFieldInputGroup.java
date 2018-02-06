@@ -1,6 +1,7 @@
 package gadgets.shrewd.gui.panel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Implementation of the input group interface specifically for a Swing TextField
@@ -13,9 +14,8 @@ public class TextFieldInputGroup extends JPanel implements InputGroupable<JTextF
 
     private TextFieldInputGroup(Builder builder) {
         this.label = new JLabel(builder.text);
-        this.component = new JTextField(
-                builder.field,
-                builder.cols);
+        this.component = new JTextField(builder.field);
+        this.component.setPreferredSize(new Dimension(builder.cols, 30));
         this.component.setEditable(builder.isEditable);
 
         this.add(label);
@@ -36,6 +36,8 @@ public class TextFieldInputGroup extends JPanel implements InputGroupable<JTextF
      * Public builder class for constructing the label and text field pieces.
      */
     public static class Builder {
+        private static final int MINIMUM_COLS = 120;
+
         private String text;
         private String field;
         private int cols;
@@ -65,11 +67,12 @@ public class TextFieldInputGroup extends JPanel implements InputGroupable<JTextF
 
         /**
          * Optional static column size for the text field.
-         * Values less than 10 will be ignored.
+         * Values less than the minimum will be ignored.
          * @param cols Field column, i.e. character, width.
          * @return Builder instance.
+         * @see Builder#MINIMUM_COLS
          */
-        public Builder columns(int cols) { this.cols = cols < 10 ? 10 : cols; return this; }
+        public Builder columns(int cols) { this.cols = cols < MINIMUM_COLS ? MINIMUM_COLS : cols; return this; }
 
         /**
          * The text field will accept user input.

@@ -11,19 +11,19 @@ import java.util.Optional;
 
 public class CommonerTab extends TabbedPanel {
 
-    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_WIDTH = 200;
 
     public CommonerTab() {
         TextFieldInputGroup primary = new TextFieldInputGroup.Builder()
-                .text("First string:")
+                .text("First set:")
                 .columns(DEFAULT_WIDTH)
                 .build();
         TextFieldInputGroup secondary = new TextFieldInputGroup.Builder()
-                .text("Second string:")
+                .text("Second set:")
                 .columns(DEFAULT_WIDTH)
                 .build();
         TextFieldInputGroup result = new TextFieldInputGroup.Builder()
-                .text("Common characters:")
+                .text("Common:")
                 .uneditable()
                 .columns(DEFAULT_WIDTH)
                 .build();
