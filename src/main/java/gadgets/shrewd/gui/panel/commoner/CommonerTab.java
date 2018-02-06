@@ -36,6 +36,12 @@ public class CommonerTab extends TabbedPanel {
         this.containers = Arrays.asList(primary, secondary, result, button);
     }
 
+    /**
+     * Internal button instance that interacts with other defined elements of the pane.
+     *
+     * This button retrieves the text in the two text fields and compares them
+     * for common characters.
+     */
     class Button extends JPanel {
         Button(JTextField primary, JTextField secondary, JTextField result) {
             JButton button = new JButton("INTERSECTION");
@@ -67,8 +73,8 @@ public class CommonerTab extends TabbedPanel {
     }
 
     @Override
-    public ImageIcon getIcon() {
-        return null;
+    public Optional<ImageIcon> getIcon() {
+        return Optional.empty();
     }
 
     @Override

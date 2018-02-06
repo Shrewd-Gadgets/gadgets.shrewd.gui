@@ -32,6 +32,12 @@ public class ScramblerTab extends TabbedPanel {
         this.containers = Arrays.asList(sentence, reversed, button);
     }
 
+    /**
+     * Internal button instance that interacts with other defined elements of the pane.
+     *
+     * This button retrieves the text in the source text field box, and places result text
+     * in the results text field.
+     */
     class Button extends JPanel {
 
         Button(JTextField source, JTextField result) {
@@ -58,8 +64,8 @@ public class ScramblerTab extends TabbedPanel {
     }
 
     @Override
-    public ImageIcon getIcon() {
-        return null;
+    public Optional<ImageIcon> getIcon() {
+        return Optional.empty();
     }
 
     @Override

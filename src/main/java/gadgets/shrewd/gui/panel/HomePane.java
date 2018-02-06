@@ -28,7 +28,7 @@ public class HomePane extends JPanel {
             //Add the loaded tab to the pane
             tabbedPane.addTab(
                     p.getTitle(),
-                    p.getIcon(),
+                    p.getIcon().orElse(null),
                     p,
                     p.getTip().orElseGet(p::getTitle));
         });

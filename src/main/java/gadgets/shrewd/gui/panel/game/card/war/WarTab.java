@@ -44,6 +44,12 @@ public class WarTab extends TabbedPanel {
         this.containers = Arrays.asList(challenger, opponent, scroll, button);
     }
 
+    /**
+     * Internal button instance that interacts with other defined elements of the pane.
+     *
+     * This button retrieves the players' names from the text fields and then, when activated,
+     * initializes a new game, allows it play, and posts the game log into the text area.
+     */
     class Button extends JPanel {
         Button(JTextField txtChallenger, JTextField txtOpponent, JTextArea txtTale) {
             JButton button = new JButton("PLAY");
@@ -81,8 +87,8 @@ public class WarTab extends TabbedPanel {
     }
 
     @Override
-    public ImageIcon getIcon() {
-        return null;
+    public Optional<ImageIcon> getIcon() {
+        return Optional.empty();
     }
 
     @Override
