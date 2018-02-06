@@ -12,9 +12,9 @@ public class HomeFrame extends JFrame {
     }
 
     private void init() {
-        this.setTitle("Shrewd Devices");
+        this.setTitle("Shrewd Gadgets");
         this.setSize(300,200); // default size is 0,0
-        this.setLocation(10,200); // default is 0,0 (top left corner)
+        this.setLocation(200,200); // default is 0,0 (top left corner)
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

@@ -7,6 +7,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -84,7 +85,9 @@ public class Deck_StackableTests {
 
         @Test
         public void return_optional_wrapped_card_from_collection() {
-            when(mDeck.getCards()).thenReturn(Collections.singletonList(CARD));
+            List<PlayingCard> cards = new ArrayList<>();
+            cards.add(CARD);
+            when(mDeck.getCards()).thenReturn(cards);
 
             Optional<PlayingCard> result = mDeck.pop();
             assertEquals(Optional.of(CARD), result);

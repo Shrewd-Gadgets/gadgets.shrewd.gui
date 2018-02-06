@@ -1,7 +1,8 @@
 package gadgets.shrewd.gui.panel;
 
-import gadgets.shrewd.gui.panel.commoner.Commoner;
-import gadgets.shrewd.gui.panel.scambler.Scrambler;
+import gadgets.shrewd.gui.panel.commoner.CommonerTab;
+import gadgets.shrewd.gui.panel.game.card.war.WarTab;
+import gadgets.shrewd.gui.panel.scambler.ScramblerTab;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +17,9 @@ public class HomePane extends JPanel {
 
         //Build a list of the tabs in the order to be displayed left-to-right.
         List<TabbedPanel> tabbedPanels = Arrays.asList(
-                new Scrambler(),
-                new Commoner());
+                new ScramblerTab(),
+                new CommonerTab(),
+                new WarTab());
 
         //Iterate over the tab panes, loading internal containers.
         tabbedPanels.forEach(p -> {

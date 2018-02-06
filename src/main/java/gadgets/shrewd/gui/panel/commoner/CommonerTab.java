@@ -9,11 +9,11 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class Commoner extends TabbedPanel {
+public class CommonerTab extends TabbedPanel {
 
     private static final int DEFAULT_WIDTH = 50;
 
-    public Commoner() {
+    public CommonerTab() {
         TextFieldInputGroup primary = new TextFieldInputGroup.Builder()
                 .text("First string:")
                 .columns(DEFAULT_WIDTH)
@@ -28,7 +28,7 @@ public class Commoner extends TabbedPanel {
                 .columns(DEFAULT_WIDTH)
                 .build();
 
-        Button button = new Commoner.Button(
+        Button button = new CommonerTab.Button(
                 primary.getComponent(),
                 secondary.getComponent(),
                 result.getComponent());

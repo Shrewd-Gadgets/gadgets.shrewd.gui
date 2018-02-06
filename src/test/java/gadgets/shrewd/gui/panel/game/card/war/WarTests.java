@@ -18,6 +18,6 @@ public class WarTests {
 
         Aftermath outcome = new Aftermath();
         game.play(outcome);
-        System.out.print(String.join(System.lineSeparator(), outcome.getTale()));
+        System.out.print(String.join(System.lineSeparator(), outcome.getLogs()));
     }
 }

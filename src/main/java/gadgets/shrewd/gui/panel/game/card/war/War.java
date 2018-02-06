@@ -119,10 +119,10 @@ public class War {
                     break;
                 case 0:
                     //WAR!  Equal card ranks were played; play again to determine turn winner.
-                    outcome.log("=====  WAR  =====");
                     //Each player must sacrifice one extra card and add it to the turn stack.
                     c.getCardFromHand().ifPresent(turn::push);
                     o.getCardFromHand().ifPresent(turn::push);
+                    outcome.log("=====  WAR (%d cards up for grabs) =====", turn.size());
                     //Restart the loop
             }
 

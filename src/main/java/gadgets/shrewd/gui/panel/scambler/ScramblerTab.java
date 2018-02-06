@@ -9,11 +9,11 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class Scrambler extends TabbedPanel {
+public class ScramblerTab extends TabbedPanel {
 
     private static final int DEFAULT_WIDTH = 30;
 
-    public Scrambler() {
+    public ScramblerTab() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         TextFieldInputGroup sentence = new TextFieldInputGroup.Builder()
@@ -25,7 +25,7 @@ public class Scrambler extends TabbedPanel {
                 .text("Reversed:")
                 .columns(DEFAULT_WIDTH)
                 .build();
-        Container button = new Scrambler.Button(
+        Container button = new ScramblerTab.Button(
                 sentence.getComponent(),
                 reversed.getComponent());
 
