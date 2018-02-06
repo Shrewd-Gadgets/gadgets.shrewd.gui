@@ -9,26 +9,26 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class Commoner extends TabbedPanel {
+public class CommonerTab extends TabbedPanel {
 
-    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_WIDTH = 200;
 
-    public Commoner() {
+    public CommonerTab() {
         TextFieldInputGroup primary = new TextFieldInputGroup.Builder()
-                .text("First string:")
+                .text("First set:")
                 .columns(DEFAULT_WIDTH)
                 .build();
         TextFieldInputGroup secondary = new TextFieldInputGroup.Builder()
-                .text("Second string:")
+                .text("Second set:")
                 .columns(DEFAULT_WIDTH)
                 .build();
         TextFieldInputGroup result = new TextFieldInputGroup.Builder()
-                .text("Common characters:")
+                .text("Common:")
                 .uneditable()
                 .columns(DEFAULT_WIDTH)
                 .build();
 
-        Button button = new Commoner.Button(
+        Button button = new CommonerTab.Button(
                 primary.getComponent(),
                 secondary.getComponent(),
                 result.getComponent());
@@ -36,6 +36,12 @@ public class Commoner extends TabbedPanel {
         this.containers = Arrays.asList(primary, secondary, result, button);
     }
 
+    /**
+     * Internal button instance that interacts with other defined elements of the pane.
+     *
+     * This button retrieves the text in the two text fields and compares them
+     * for common characters.
+     */
     class Button extends JPanel {
         Button(JTextField primary, JTextField secondary, JTextField result) {
             JButton button = new JButton("INTERSECTION");
@@ -67,8 +73,8 @@ public class Commoner extends TabbedPanel {
     }
 
     @Override
-    public ImageIcon getIcon() {
-        return null;
+    public Optional<ImageIcon> getIcon() {
+        return Optional.empty();
     }
 
     @Override

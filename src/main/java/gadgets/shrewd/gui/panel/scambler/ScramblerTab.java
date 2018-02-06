@@ -9,11 +9,11 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class Scrambler extends TabbedPanel {
+public class ScramblerTab extends TabbedPanel {
 
-    private static final int DEFAULT_WIDTH = 30;
+    private static final int DEFAULT_WIDTH = 300;
 
-    public Scrambler() {
+    public ScramblerTab() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         TextFieldInputGroup sentence = new TextFieldInputGroup.Builder()
@@ -25,13 +25,19 @@ public class Scrambler extends TabbedPanel {
                 .text("Reversed:")
                 .columns(DEFAULT_WIDTH)
                 .build();
-        Container button = new Scrambler.Button(
+        Container button = new ScramblerTab.Button(
                 sentence.getComponent(),
                 reversed.getComponent());
 
         this.containers = Arrays.asList(sentence, reversed, button);
     }
 
+    /**
+     * Internal button instance that interacts with other defined elements of the pane.
+     *
+     * This button retrieves the text in the source text field box, and places result text
+     * in the results text field.
+     */
     class Button extends JPanel {
 
         Button(JTextField source, JTextField result) {
@@ -58,8 +64,8 @@ public class Scrambler extends TabbedPanel {
     }
 
     @Override
-    public ImageIcon getIcon() {
-        return null;
+    public Optional<ImageIcon> getIcon() {
+        return Optional.empty();
     }
 
     @Override
